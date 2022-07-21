@@ -1,4 +1,4 @@
-package com.aquent.crudapp.person;
+package com.aquent.crudapp.service.person;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
+import com.aquent.crudapp.model.person.Person;
+import com.aquent.crudapp.dao.person.PersonDao;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;

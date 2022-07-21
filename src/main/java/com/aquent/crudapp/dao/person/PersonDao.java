@@ -1,7 +1,8 @@
-package com.aquent.crudapp.person;
+package com.aquent.crudapp.dao.person;
 
 import java.util.List;
 
+import com.aquent.crudapp.model.person.Person;
 import org.springframework.stereotype.Repository;
 
 /**
