@@ -1,5 +1,5 @@
 import ClientsTableLayout from '../Layouts/TableLayout';
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import DialogBox from '../Layouts/Popup';
 import ClientForm from '../Layouts/ClientFormLayout';
 
@@ -12,7 +12,7 @@ export default function ClientsTable(props){
 
     return(
         <>
-        <DialogBox openPopup={openPopup} setOpenPopup={setOpenPopup} title="Add New Client">
+        <DialogBox openPopup={openPopup} setOpenPopup={setOpenPopup} title={((currClient) ? "Edit" : "Create New") + " Client"}>
             <ClientForm formFor={formFor} cancelForm={setOpenPopup} client={currClient}></ClientForm>
         </DialogBox>
         <ClientsTableLayout allHeaders={allHeaders}

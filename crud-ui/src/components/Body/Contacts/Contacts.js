@@ -54,7 +54,7 @@ export default function ContactsTable(props) {
 
   return (
     <>
-    <DialogBox openPopup={openPopup} setOpenPopup={setOpenPopup} title="Add New Person">
+    <DialogBox openPopup={openPopup} setOpenPopup={setOpenPopup} title={((currPerson) ? "Edit" : "Create New") + " Person"}>
       <PersonForm clientMap={clientMap}
        formFor={formFor} 
        cancelForm={setOpenPopup} 

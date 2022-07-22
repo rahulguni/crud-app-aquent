@@ -64,6 +64,39 @@ export const createClient = async(client) => {
     try {
         const fetchResponse = await fetch('client/create', settings);
         await fetchResponse.json();
+        window.location.reload();
+    }
+    catch(e) {
+        return e;
+    }
+}
+
+export const updateClient = async(client) => {
+    const settings = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(client)
+    }
+    try {
+        const fetchResponse = await fetch('client/edit', settings);
+        await fetchResponse.json();
+        window.location.reload();
+    }
+    catch(e) {
+        return e;
+    }
+}
+
+export const deleteClient = async(client) => {
+    const settings = {
+        method: 'DELETE'
+    };
+    try {
+        const fetchResponse = await fetch(`client/delete?clientId=${client.clientId}`, settings);
+        await fetchResponse.json();
+        window.location.reload();
     }
     catch(e) {
         return e;

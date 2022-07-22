@@ -24,12 +24,13 @@ public class JdbcClientDao implements ClientDao{
     private static final String SQL_LIST_CLIENTS = "SELECT * FROM client ORDER BY client_name";
     private static final String SQl_READ_CLIENT = "SELECT * FROM client WHERE client_id = :clientId";
     private static final String SQL_UPDATE_CLIENT = "UPDATE client SET (client_id, client_name, client_phone, client_uri, street_address, city, state, zip_code)"
-            + " = (:clientId, :name, :companyURI, :phone, :streetAddress, :city, :state, :zipCode)"
+            + " = (:clientId, :name, :phone, :companyURI, :streetAddress, :city, :state, :zipCode)"
             + "WHERE client_id = :clientId";
     private static final String SQL_CREATE_CLIENT = "INSERT INTO client (client_name, client_phone, client_uri, street_address, city, state, zip_code)"
             + "VALUES (:name, :phone, :companyURI, :streetAddress, :city, :state, :zipCode)";
     private static final String SQL_DELETE_CLIENT = "DELETE FROM client WHERE client_id = :clientId";
-
+    private static final String SQL_UPDATE_PERSON_ON_DELETE = "UPDATE person SET client_id = -1 WHERE client_id = :clientId";
+    private static final String SQL_LIST_CLIENT_CONTACTS = "SELECT * FROM person WHERE client_id = :clientId";
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -66,6 +67,8 @@ public class JdbcClientDao implements ClientDao{
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
     public void deleteClient(Integer clientId) {
+        //Possible to make a join statement? See later
+        namedParameterJdbcTemplate.update(SQL_UPDATE_PERSON_ON_DELETE, Collections.singletonMap("clientId", clientId));
         namedParameterJdbcTemplate.update(SQL_DELETE_CLIENT, Collections.singletonMap("clientId", clientId));
     }
 
