@@ -28,7 +28,7 @@ export const updatePerson = async(person, openPopUp, updateContacts) => {
     };
     try {
         const fetchResponse = await fetch('person/edit', settings);
-        const data = await fetchResponse.json();
+        await fetchResponse.json();
         openPopUp(false);
         updateContacts(person);
     }
@@ -43,9 +43,27 @@ export const removeContact = async(person, openPopUp, removeContacts) => {
     };
     try {
         const fetchResponse = await fetch(`person/delete?personId=${person.personId}`, settings);
-        const data = await fetchResponse.json();
+        await fetchResponse.json();
         openPopUp(false);
         removeContacts(person);
+    }
+    catch(e) {
+        return e;
+    }
+}
+
+export const createClient = async(client) => {
+    delete client.clientId
+    const settings = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body : JSON.stringify(client)
+    };
+    try {
+        const fetchResponse = await fetch('client/create', settings);
+        await fetchResponse.json();
     }
     catch(e) {
         return e;

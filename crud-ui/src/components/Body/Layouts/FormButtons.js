@@ -1,6 +1,6 @@
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import {createPerson, updatePerson, removeContact} from '../../Requests/Services';
+import {createPerson, updatePerson, removeContact, createClient} from '../../Requests/Services';
 
 const AllButtons = (props) => {
     const formFor = props.formFor;
@@ -12,7 +12,7 @@ const AllButtons = (props) => {
             variant="contained"
             color="success"
             type="submit"
-            onClick={() => (props.formMode === 'person') ? createPerson(props.currObject, props.cancelBtn, props.setAllTableObjects) : null}
+            onClick={() => (props.formMode === 'person') ? createPerson(props.currObject, props.cancelBtn, props.setAllTableObjects) : createClient(props.currObject)}
           >
             Create
           </Button>
