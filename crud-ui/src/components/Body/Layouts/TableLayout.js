@@ -15,6 +15,8 @@ export default function BasicTable(props) {
   const allHeaders = props.allHeaders;
   const tableFor = props.tableFor;
   const clientMap = props.clientMap;
+  const setCurrObject = props.setCurrObject;
+  const setFormFor = props.setFormFor;
 
   return (
     <TableContainer component={Paper}>
@@ -31,7 +33,10 @@ export default function BasicTable(props) {
           }
           <TableCell align='center' colSpan={2}> Actions
           <Tooltip title="Add">
-              <IconButton sx={{ pl: 3, pr : 3}} onClick={() => props.openForm(true)}>
+              <IconButton sx={{ pl: 3, pr : 3}} onClick={() => {
+                setCurrObject(null);
+                setFormFor("Create");
+                props.openForm(true)}}>
                 <AddBoxIcon/>
               </IconButton>
             </Tooltip>
@@ -40,7 +45,7 @@ export default function BasicTable(props) {
         </TableHead>
         <TableBody>
           <RowLayouts rowsFor={tableFor} objectData={props.allContacts || props.allClients}
-          clientMap={clientMap}>
+          clientMap={clientMap} openForm={props.openForm} setCurrObject={setCurrObject} setFormFor={setFormFor} >
           </RowLayouts>
         </TableBody>
       </Table>

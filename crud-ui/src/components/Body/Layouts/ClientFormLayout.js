@@ -15,7 +15,6 @@ const defaultValues = {
 };
 const Form = (props) => {
   const formFor = props.formFor;
- 
   let editable = true;
   if(formFor === "View") {
     editable = false;

@@ -6,6 +6,8 @@ import PersonForm from '../Layouts/PersonFormLayout'
 export default function ContactsTable(props) {
   const allClients = props.allClients;
   const [openPopup, setOpenPopup] = useState(false);
+  const [currPerson, setCurrPerson] = useState();
+  const [formFor, setFormFor] = useState("Create");
 
   //Pass this map to render Company name for people
   let clientMap = new Map().set(-1, "None");
@@ -29,13 +31,15 @@ export default function ContactsTable(props) {
   return (
     <>
     <DialogBox openPopup={openPopup} setOpenPopup={setOpenPopup} title="Add New Person">
-      <PersonForm clientMap={clientMap} formFor="Create" cancelForm={setOpenPopup}></PersonForm>
+      <PersonForm clientMap={clientMap} formFor={formFor} cancelForm={setOpenPopup} person={currPerson}></PersonForm>
     </DialogBox>
     <ContactsTableLayout allContacts = {allContacts}
       allHeaders = {contactsHeader} 
       clientMap={clientMap} 
       openForm={setOpenPopup}
-      tableFor="Contacts">
+      tableFor="Contacts"
+      setCurrObject={setCurrPerson}
+      setFormFor={setFormFor}>
     </ContactsTableLayout>
     </>
    );

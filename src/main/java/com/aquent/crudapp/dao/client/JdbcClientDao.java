@@ -27,7 +27,7 @@ public class JdbcClientDao implements ClientDao{
             + " = (:clientId, :name, :companyURI, :phone, :streetAddress, :city, :state, :zipCode)"
             + "WHERE client_id = :clientId";
     private static final String SQL_CREATE_CLIENT = "INSERT INTO client (client_name, client_phone, client_uri, street_address, city, state, zip_code)"
-            + "VALUES (:name, :companyURI, :phone, :streetAddress, :city, :state, :zipCode)";
+            + "VALUES (:name, :phone, :companyURI, :streetAddress, :city, :state, :zipCode)";
     private static final String SQL_DELETE_CLIENT = "DELETE FROM client WHERE client_id = :clientId";
 
 

@@ -7,6 +7,9 @@ import TableRow from '@mui/material/TableRow';
 export default function getAllRows(props) {
     const rowsFor = props.rowsFor;
     const objectData = props.objectData;
+    const setCurrObject = props.setCurrObject;
+    const openForm = props.openForm;
+    const setFormFor = props.setFormFor;
     const clientMap = props.clientMap;
 
     if(rowsFor === "Contacts") {
@@ -22,8 +25,16 @@ export default function getAllRows(props) {
               <TableCell align='right'> {person.phone}</TableCell>
               <TableCell align="right">{person.emailAddress}</TableCell>
               <TableCell align='right'> {clientMap.get(person.clientId)} </TableCell>
-              <TableCell align='right'><Button><VisibilityIcon/></Button></TableCell>
-              <TableCell align='left'><Button><EditIcon/></Button></TableCell>
+              <TableCell align='right'><Button onClick={() => {
+                setFormFor("View");
+                setCurrObject(person);
+                openForm(true);
+              }}><VisibilityIcon/></Button></TableCell>
+              <TableCell align='left'><Button onClick={() => {
+                setFormFor("Edit");
+                setCurrObject(person);
+                openForm(true);
+              }}><EditIcon/></Button></TableCell>
 
             </TableRow>
           )
@@ -40,8 +51,16 @@ export default function getAllRows(props) {
               </TableCell>
               <TableCell align='right'>{client.companyURI}</TableCell>
               <TableCell align='right'> {client.phone}</TableCell>
-              <TableCell align='right'><Button><VisibilityIcon/></Button></TableCell>
-              <TableCell align='left'><Button><EditIcon/></Button></TableCell>
+              <TableCell align='right'><Button onClick={() => {
+                setFormFor("View");
+                setCurrObject(client);
+                openForm(true);
+              }}><VisibilityIcon/></Button></TableCell>
+              <TableCell align='left'><Button onClick={() => {
+                setFormFor("Edit");
+                setCurrObject(client);
+                openForm(true);
+              }}><EditIcon/></Button></TableCell>
 
             </TableRow>
           )
