@@ -3,6 +3,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import Button from '@mui/material/Button';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 
 export default function getAllRows(props) {
     const rowsFor = props.rowsFor;
@@ -51,16 +52,22 @@ export default function getAllRows(props) {
               </TableCell>
               <TableCell align='right'>{client.companyURI}</TableCell>
               <TableCell align='right'> {client.phone}</TableCell>
-              <TableCell align='right'><Button onClick={() => {
+              <TableCell align='center'>
+              <Button onClick={() => {
                 setFormFor("View");
                 setCurrObject(client);
                 openForm(true);
-              }}><VisibilityIcon/></Button></TableCell>
-              <TableCell align='left'><Button onClick={() => {
+              }}><VisibilityIcon/></Button>
+                <Button onClick={() => {
                 setFormFor("Edit");
                 setCurrObject(client);
                 openForm(true);
-              }}><EditIcon/></Button></TableCell>
+              }}><EditIcon/></Button>
+                <Button onClick={() => {
+                    setCurrObject(client);
+                    props.openFormForClientContacts(true);
+                }}><PeopleAltIcon/></Button>
+                </TableCell>
 
             </TableRow>
           )

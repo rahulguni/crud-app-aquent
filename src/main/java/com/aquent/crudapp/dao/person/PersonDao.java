@@ -18,6 +18,13 @@ public interface PersonDao {
      */
     List<Person> listPeople();
 
+    List<Person> listPeopleOfClient(Integer clientId);
+
+    List<Person> listPeopleWithNoClients();
+
+    void addClientFromPersonId(Integer personId, Integer clientId);
+
+    void deletePersonClientFromId(Integer personId);
     /**
      * Creates a new person record.
      *

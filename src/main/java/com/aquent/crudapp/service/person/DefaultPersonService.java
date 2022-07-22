@@ -35,6 +35,29 @@ public class DefaultPersonService implements PersonService {
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public List<Person> listPeopleOfClient(Integer clientId) {
+        return personDao.listPeopleOfClient(clientId);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public List<Person> listPeopleWithNoClients() {
+        return personDao.listPeopleWithNoClients();
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
+    public void addClientFromPersonId(Integer personId, Integer clientId) {
+        personDao.addClientFromPersonId(personId, clientId);
+    }
+
+    @Override
+    public void updatePersonClientFromId(Integer personId) {
+        personDao.deletePersonClientFromId(personId);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public Person readPerson(Integer id) {
         return personDao.readPerson(id);
     }

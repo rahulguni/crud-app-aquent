@@ -29,10 +29,6 @@ function App() {
         return(
           <ContactsTable allClients={allClients}></ContactsTable>
         )
-      case 3:
-        return(
-          <ContactsTable allClients={allClients}></ContactsTable>
-        )
       default:
         return;
     }

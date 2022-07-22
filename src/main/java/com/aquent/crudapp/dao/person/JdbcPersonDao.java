@@ -3,7 +3,9 @@ package com.aquent.crudapp.dao.person;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.aquent.crudapp.model.person.Person;
 import org.springframework.jdbc.core.RowMapper;
@@ -29,6 +31,10 @@ public class JdbcPersonDao implements PersonDao {
                                                   + " WHERE person_id = :personId";
     private static final String SQL_CREATE_PERSON = "INSERT INTO person (client_id, first_name, last_name, person_phone, email_address, street_address, city, state, zip_code)"
                                                   + " VALUES (:clientId, :firstName, :lastName, :phone, :emailAddress, :streetAddress, :city, :state, :zipCode)";
+    private static final String SQL_LIST_CLIENT_CONTACTS = "SELECT * FROM person WHERE client_id = :clientId";
+    public static final String SQL_LIST_CONTACTS_WITH_NO_CLIENTS = "SELECT * FROM person WHERE client_id = -1";
+    public static final String SQL_UPDATE_CLIENT_FROM_PERSONID = "UPDATE person SET client_id = :clientId WHERE person_id = :personId";
+    public static final String SQL_DELETE_CLIENT_FROM_PERSONID= "UPDATE person SET client_id = -1 WHERE person_id = :personId";
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -40,6 +46,33 @@ public class JdbcPersonDao implements PersonDao {
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Person> listPeople() {
         return namedParameterJdbcTemplate.getJdbcOperations().query(SQL_LIST_PEOPLE, new PersonRowMapper());
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public List<Person> listPeopleOfClient(Integer clientId) {
+        return namedParameterJdbcTemplate.query(SQL_LIST_CLIENT_CONTACTS, Collections.singletonMap("clientId", clientId), new PersonRowMapper());
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public List<Person> listPeopleWithNoClients() {
+        return namedParameterJdbcTemplate.getJdbcOperations().query(SQL_LIST_CONTACTS_WITH_NO_CLIENTS, new PersonRowMapper());
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
+    public void addClientFromPersonId(Integer personId, Integer clientId) {
+        Map mapper = new HashMap<String, Integer>();
+        mapper.put("personId", personId);
+        mapper.put("clientId", clientId);
+        namedParameterJdbcTemplate.update(SQL_UPDATE_CLIENT_FROM_PERSONID, mapper);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
+    public void deletePersonClientFromId(Integer personId) {
+        namedParameterJdbcTemplate.update(SQL_DELETE_CLIENT_FROM_PERSONID, Collections.singletonMap("personId", personId));
     }
 
     @Override

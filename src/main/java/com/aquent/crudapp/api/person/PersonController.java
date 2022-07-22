@@ -33,6 +33,18 @@ public class PersonController {
         return personService.listPeople();
     }
 
+    @GetMapping(value = "listForClient")
+    public List<Person> listForClient(@RequestParam Integer clientId) { return personService.listPeopleOfClient(clientId);}
+
+    @GetMapping(value = "unassignedPeople")
+    public List<Person> unassignedPeople() { return personService.listPeopleWithNoClients();}
+
+    @PutMapping(value="updatePersonById")
+    public void updatePersonById(@RequestParam Integer personId, @RequestParam Integer clientId) {  personService.addClientFromPersonId(personId, clientId);}
+
+    @PutMapping(value="deleteClientFromPersonId")
+    public void deleteClientFromPersonId(@RequestParam Integer personId) { personService.updatePersonClientFromId(personId);}
+
     /**
      * Validates and saves a new person.
      * On success, the person name is sent.

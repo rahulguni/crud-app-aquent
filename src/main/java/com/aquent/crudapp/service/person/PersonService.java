@@ -18,6 +18,14 @@ public interface PersonService {
      */
     List<Person> listPeople();
 
+    List<Person> listPeopleOfClient(Integer clientId);
+
+    List<Person> listPeopleWithNoClients();
+
+    void addClientFromPersonId(Integer personId, Integer clientId);
+
+    void updatePersonClientFromId(Integer personId);
+
     /**
      * Creates a new person record.
      *
