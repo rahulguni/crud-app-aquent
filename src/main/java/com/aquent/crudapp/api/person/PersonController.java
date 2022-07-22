@@ -7,7 +7,6 @@ import java.util.NoSuchElementException;
 
 import com.aquent.crudapp.model.person.Person;
 import com.aquent.crudapp.service.person.PersonService;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -25,9 +24,9 @@ public class PersonController {
     }
 
     /**
-     * Renders the listing page.
+     * Sends all list of people.
      *
-     * @return list view populated with the current list of people
+     * @return list of people
      */
     @GetMapping(value = "list")
     public List<Person> list() {
@@ -36,11 +35,11 @@ public class PersonController {
 
     /**
      * Validates and saves a new person.
-     * On success, the user is redirected to the listing page.
-     * On failure, the form is redisplayed with the validation errors.
+     * On success, the person name is sent.
+     * On failure, the validation errors are sent.
      *
      * @param person populated form bean for the person
-     * @return redirect, or create view with errors
+     * @return person name as a single-element list to check in frontend.
      */
     @PostMapping(value = "create")
     public List<String> create(@RequestBody Person person) {
@@ -55,26 +54,12 @@ public class PersonController {
     }
 
     /**
-     * Renders an edit form for an existing person record.
-     *
-     * @param personId the ID of the person to edit
-     * @return edit view populated from the person record
-     */
-//    @GetMapping(value = "edit/{personId}")
-//    public ModelAndView edit(@PathVariable Integer personId) {
-//        ModelAndView mav = new ModelAndView("person/edit");
-//        mav.addObject("person", personService.readPerson(personId));
-//        mav.addObject("errors", new ArrayList<String>());
-//        return mav;
-//    }
-
-    /**
      * Validates and saves an edited person.
-     * On success, the user is redirected to the listing page.
-     * On failure, the form is redisplayed with the validation errors.
+     * On success, the person name is sent
+     * On failure, the validation errors are sent
      *
      * @param person populated form bean for the person
-     * @return redirect, or edit view with errors
+     * @return person name as a single-element list to check in frontend.
      */
     @PutMapping(value = "edit")
     public List<String> edit(@RequestBody Person person) {
@@ -89,10 +74,10 @@ public class PersonController {
     }
 
     /**
-     * Handles person deletion or cancellation, redirecting to the listing page in either case.
+     * Handles person deletion
      *
      * @param personId the ID of the person to be deleted
-     * @return redirect to the listing page
+     * @return true if success, else false
      */
     @DeleteMapping(value = "delete")
     public boolean delete(@RequestParam Integer personId) {

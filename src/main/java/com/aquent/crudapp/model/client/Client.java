@@ -1,32 +1,25 @@
-package com.aquent.crudapp.model.person;
+package com.aquent.crudapp.model.client;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * The person entity corresponding to the "person" table in the database.
+ * The person entity corresponding to the "client" table in the database.
  */
-public class Person {
-
-    private Integer personId;
-    @NotNull
+public class Client {
     private Integer clientId;
 
     @NotNull
-    @Size(min = 1, max = 50, message = "First name is required with maximum length of 50")
-    private String firstName;
+    @Size(min = 1, max = 100, message = "Company name is required with maximum length of 100")
+    private String name;
 
     @NotNull
-    @Size(min = 1, max = 50, message = "Last name is required with maximum length of 50")
-    private String lastName;
+    @Size(min = 8, max = 50, message = "Company URI is required with maximum length of 50 and minimum length of 8.")
+    private String companyURI;
 
     @NotNull
     @Size(min = 10, max = 15, message = "Company phone is required with maximum length of 15 and minimum length of 10.")
     private String phone;
-
-    @NotNull
-    @Size(min = 1, max = 50, message = "Email address is required with maximum length of 50")
-    private String emailAddress;
 
     @NotNull
     @Size(min = 1, max = 50, message = "Street address is required with maximum length of 50")
@@ -44,32 +37,28 @@ public class Person {
     @Size(min = 5, max = 5, message = "Zip code is required with length 5")
     private String zipCode;
 
-    public Integer getPersonId() {
-        return personId;
+    public Integer getClientId() {
+        return clientId;
     }
 
-    public void setPersonId(Integer personId) {
-        this.personId = personId;
+    public void setClientId(Integer clientId) {
+        this.clientId = clientId;
     }
 
-    public Integer getClientId() { return this.clientId; };
-
-    public void setClientId(Integer clientId) { this.clientId = clientId; }
-
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getCompanyURI() {
+        return companyURI;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setCompanyURI(String companyURI) {
+        this.companyURI = companyURI;
     }
 
     public String getPhone() {
@@ -78,14 +67,6 @@ public class Person {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
     }
 
     public String getStreetAddress() {
@@ -122,6 +103,6 @@ public class Person {
 
     @Override
     public String toString() {
-        return this.firstName + " " + this.lastName;
+        return this.name;
     }
 }
