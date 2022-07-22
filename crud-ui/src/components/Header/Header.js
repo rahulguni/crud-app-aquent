@@ -15,7 +15,7 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 
 const pages = ['Contacts', 'Clients', 'Search'];
 
-const ResponsiveAppBar = () => {
+const ResponsiveAppBar = (props) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -25,6 +25,7 @@ const ResponsiveAppBar = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+
 
   return (
     <AppBar position="static">
@@ -105,22 +106,15 @@ const ResponsiveAppBar = () => {
             AQUENT
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {pages.map((page, idx) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => props.currentViewFunc(idx+1)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
               </Button>
             ))}
-          </Box>
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Add">
-              <IconButton sx={{ p: 0 }}>
-                <AddBoxIcon sx={{color: 'white'}}/>
-              </IconButton>
-            </Tooltip>
           </Box>
         </Toolbar>
       </Container>

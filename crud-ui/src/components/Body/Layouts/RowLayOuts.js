@@ -21,7 +21,7 @@ export default function getAllRows(props) {
               <TableCell align='right'>{person.firstName}</TableCell>
               <TableCell align='right'> {person.phone}</TableCell>
               <TableCell align="right">{person.emailAddress}</TableCell>
-              <TableCell align='right'> {clientMap.get(person.clientId) || "None"} </TableCell>
+              <TableCell align='right'> {clientMap.get(person.clientId)} </TableCell>
               <TableCell align='right'><Button><VisibilityIcon/></Button></TableCell>
               <TableCell align='left'><Button><EditIcon/></Button></TableCell>
 

@@ -7,6 +7,7 @@ import {useState, useEffect} from 'react';
 function App() {
 
   const[allClients, setAllClients] = useState([]);
+  const[viewMode, setViewMode] = useState(1);
 
   const getAllClients = async() => {
     const response = await fetch("client/list");
@@ -16,15 +17,30 @@ function App() {
 
   useEffect(() => {
     getAllClients();
-  }, []);
+  }, [viewMode]);
 
+  const CurrentView = () => {
+    switch(viewMode) {
+      case 1:
+        return(
+          <ClientsTable allClients={allClients}></ClientsTable>
+        )
+      case 2:
+        return(
+          <ContactsTable allClients={allClients}></ContactsTable>
+        )
+      case 3:
+        return(
+          <ContactsTable allClients={allClients}></ContactsTable>
+        )
+    }
+  }
 
   return (
     <div className="App">
       <header className="App-header">
-        <Header></Header>
-        {/* <ContactsTable allClients={allClients}></ContactsTable> */}
-        <ClientsTable allClients={allClients}></ClientsTable>
+        <Header currentViewFunc={setViewMode}></Header>
+        <CurrentView/>
       </header>
     </div>
   );

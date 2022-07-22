@@ -6,7 +6,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import RowLayouts from './RowLayOuts'
+import RowLayouts from './RowLayOuts';
+import AddBoxIcon from '@mui/icons-material/AddBox';
+import Tooltip from '@mui/material/Tooltip';
+import IconButton from '@mui/material/IconButton';
 
 export default function BasicTable(props) {
   const allHeaders = props.allHeaders;
@@ -17,16 +20,22 @@ export default function BasicTable(props) {
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
-          <TableRow>
+          <TableRow sx={{ bgcolor: 'text.secondary' }}>
             {
             allHeaders.map((currHeader, idx) => {
               if(idx === 0) {
-                return <TableCell>{currHeader} </TableCell>
+                return <TableCell sx={{fontWeight: 'bold'}}>{currHeader} </TableCell>
               }
-              return <TableCell align="right">{currHeader}</TableCell>
+              return <TableCell sx={{fontWeight: 'bold'}} align="right">{currHeader}</TableCell>
             })
           }
-          <TableCell align='center' colSpan={2}> Actions </TableCell>
+          <TableCell align='center' colSpan={2}> Actions
+          <Tooltip title="Add">
+              <IconButton sx={{ pl: 3, pr : 3}} onClick={() => props.openForm(true)}>
+                <AddBoxIcon/>
+              </IconButton>
+            </Tooltip>
+           </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
