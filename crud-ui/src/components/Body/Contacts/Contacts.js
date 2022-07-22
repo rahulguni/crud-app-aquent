@@ -24,6 +24,30 @@ export default function ContactsTable(props) {
     setAllContacts([...data]);
   };
 
+  const addContact = (person) => {
+    setAllContacts([person, ...allContacts]);
+  }
+
+  const updateContact = (person) => {
+    const newState = allContacts.map(obj => {
+      if(obj.personId === person.personId) {
+        return {...person};
+      }
+      return obj;
+    });
+    setAllContacts([...newState]);
+  }
+
+  const removeContact = (person) => {
+    const newState = [];
+    allContacts.forEach(contact => {
+      if(contact.personId !== person.personId) {
+        newState.push(contact);
+      }
+    })
+    setAllContacts([...newState]);
+  }
+
   useEffect(() => {
     getAllContacts();
   },[]);
@@ -31,7 +55,13 @@ export default function ContactsTable(props) {
   return (
     <>
     <DialogBox openPopup={openPopup} setOpenPopup={setOpenPopup} title="Add New Person">
-      <PersonForm clientMap={clientMap} formFor={formFor} cancelForm={setOpenPopup} person={currPerson}></PersonForm>
+      <PersonForm clientMap={clientMap}
+       formFor={formFor} 
+       cancelForm={setOpenPopup} 
+       person={currPerson} 
+       setAllTableObjects={addContact}
+       updateTableObjects={updateContact}
+       removeTableObjects={removeContact}></PersonForm>
     </DialogBox>
     <ContactsTableLayout allContacts = {allContacts}
       allHeaders = {contactsHeader} 

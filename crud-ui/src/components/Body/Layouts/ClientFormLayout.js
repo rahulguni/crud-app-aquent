@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import FormButtons from "./FormButtons";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
+import { OutlinedInput } from "@mui/material";
 
 const defaultValues = {
   clientId: "",
@@ -31,6 +36,31 @@ const Form = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
   };
+
+  const AllStatesInput = (props) => {
+    const allStates = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY',
+    'LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA',
+    'RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY']
+    return(
+      <FormControl sx={{width:100}} disabled={!props.disabled}>
+        <InputLabel id="states-list-id">State</InputLabel>
+        <Select
+          labelId="State"
+          id="state-id"
+          name="state"
+          value={formValues.state}
+          onChange={handleInputChange}
+          input={<OutlinedInput label="Client" />}
+        >
+          {allStates.map((state, val) => (
+            <MenuItem key={val} value={state}>
+              {state}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    )
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -96,15 +126,7 @@ const Form = (props) => {
           />
         </Grid>
         <Grid item>
-          <TextField
-            id="state-input"
-            name="state"
-            label="State"
-            type="text"
-            value={formValues.state}
-            onChange={handleInputChange}
-            disabled={!editable}
-          />
+          <AllStatesInput disabled={editable}></AllStatesInput>
           <TextField
             id="zipCode-input"
             name="zipCode"
@@ -116,7 +138,7 @@ const Form = (props) => {
             disabled={!editable}
           />
         </Grid>
-        <FormButtons formFor={formFor} cancelBtn={props.cancelForm}/>
+        <FormButtons formFor={formFor} cancelBtn={props.cancelForm} formMode={"client"} currObject={formValues}/>
       </Grid>
     </form>
   );

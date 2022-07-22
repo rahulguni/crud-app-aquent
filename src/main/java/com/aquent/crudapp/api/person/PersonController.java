@@ -45,9 +45,9 @@ public class PersonController {
     public List<String> create(@RequestBody Person person) {
         List<String> errors = personService.validatePerson(person);
         if (errors.isEmpty()) {
-            personService.createPerson(person);
+            String personID = personService.createPerson(person).toString();
             List<String> successList = new ArrayList<>();
-            successList.add(person.toString());
+            successList.add(personID);
             return successList;
         }
         return errors;

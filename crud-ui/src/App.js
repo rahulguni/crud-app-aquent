@@ -33,6 +33,8 @@ function App() {
         return(
           <ContactsTable allClients={allClients}></ContactsTable>
         )
+      default:
+        return;
     }
   }
 
