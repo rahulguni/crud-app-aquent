@@ -1,9 +1,6 @@
 package com.aquent.crudapp.service.client;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
@@ -32,6 +29,7 @@ public class DefaultClientService implements ClientService {
     public List<Client> listClient() {
         return clientDao.listClient();
     }
+
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)

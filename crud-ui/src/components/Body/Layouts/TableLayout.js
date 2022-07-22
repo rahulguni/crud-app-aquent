@@ -6,15 +6,13 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import EditIcon from '@mui/icons-material/Edit';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import Button from '@mui/material/Button';
-
+import RowLayouts from './RowLayOuts'
 
 export default function BasicTable(props) {
-  const allPeople = props.allContacts;
   const allHeaders = props.allHeaders;
-  
+  const tableFor = props.tableFor;
+  const clientMap = props.clientMap;
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -32,23 +30,9 @@ export default function BasicTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {allPeople.map((person) => (
-            <TableRow
-              key={person.personId}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {person.lastName}
-              </TableCell>
-              <TableCell align='right'>{person.firstName}</TableCell>
-              <TableCell align='right'> xxx-xxx-xxxx</TableCell>
-              <TableCell align="right">{person.emailAddress}</TableCell>
-              <TableCell align='right'> xxx Company </TableCell>
-              <TableCell align='right'><Button><VisibilityIcon/></Button></TableCell>
-              <TableCell align='left'><Button><EditIcon/></Button></TableCell>
-
-            </TableRow>
-          ))}
+          <RowLayouts rowsFor={tableFor} objectData={props.allContacts || props.allClients}
+          clientMap={clientMap}>
+          </RowLayouts>
         </TableBody>
       </Table>
     </TableContainer>

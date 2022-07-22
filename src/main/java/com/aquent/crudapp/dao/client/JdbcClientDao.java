@@ -30,6 +30,7 @@ public class JdbcClientDao implements ClientDao{
             + "VALUES (:name, :companyURI, :phone, :streetAddress, :city, :state, :zipCode)";
     private static final String SQL_DELETE_CLIENT = "DELETE FROM client WHERE client_id = :clientId";
 
+
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     public JdbcClientDao(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
