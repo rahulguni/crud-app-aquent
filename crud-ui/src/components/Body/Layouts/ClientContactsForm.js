@@ -47,11 +47,11 @@ const Form = (props) => {
       },
     };
     try {
-      await fetch(
+      const fetchResponse = await fetch(
         `person/updatePersonById?personId=${selectedContact}&clientId=${currClient.clientId}`,
         settings
       );
-      //await fetchResponse.json();
+      await fetchResponse.json();
       window.location.reload();
     } catch (e) {
       return e;
@@ -66,11 +66,11 @@ const Form = (props) => {
       },
     };
     try {
-      await fetch(
+      const fetchResponse = await fetch(
         `person/deleteClientFromPersonId?personId=${personId}`,
         settings
       );
-      //await fetchResponse.json();
+      await fetchResponse.json();
       window.location.reload();
     } catch (e) {
       return e;
