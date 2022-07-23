@@ -22,9 +22,9 @@ public interface PersonService {
 
     List<Person> listPeopleWithNoClients();
 
-    void addClientFromPersonId(Integer personId, Integer clientId);
+    int addClientFromPersonId(Integer personId, Integer clientId);
 
-    void updatePersonClientFromId(Integer personId);
+    int updatePersonClientFromId(Integer personId);
 
     /**
      * Creates a new person record.

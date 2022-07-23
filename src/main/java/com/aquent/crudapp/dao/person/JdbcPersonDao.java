@@ -62,17 +62,17 @@ public class JdbcPersonDao implements PersonDao {
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
-    public void addClientFromPersonId(Integer personId, Integer clientId) {
+    public int addClientFromPersonId(Integer personId, Integer clientId) {
         Map mapper = new HashMap<String, Integer>();
         mapper.put("personId", personId);
         mapper.put("clientId", clientId);
-        namedParameterJdbcTemplate.update(SQL_UPDATE_CLIENT_FROM_PERSONID, mapper);
+        return namedParameterJdbcTemplate.update(SQL_UPDATE_CLIENT_FROM_PERSONID, mapper);
     }
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
-    public void deletePersonClientFromId(Integer personId) {
-        namedParameterJdbcTemplate.update(SQL_DELETE_CLIENT_FROM_PERSONID, Collections.singletonMap("personId", personId));
+    public int deletePersonClientFromId(Integer personId) {
+        return namedParameterJdbcTemplate.update(SQL_DELETE_CLIENT_FROM_PERSONID, Collections.singletonMap("personId", personId));
     }
 
     @Override

@@ -47,13 +47,13 @@ public class DefaultPersonService implements PersonService {
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
-    public void addClientFromPersonId(Integer personId, Integer clientId) {
-        personDao.addClientFromPersonId(personId, clientId);
+    public int addClientFromPersonId(Integer personId, Integer clientId) {
+        return personDao.addClientFromPersonId(personId, clientId);
     }
 
     @Override
-    public void updatePersonClientFromId(Integer personId) {
-        personDao.deletePersonClientFromId(personId);
+    public int updatePersonClientFromId(Integer personId) {
+        return personDao.deletePersonClientFromId(personId);
     }
 
     @Override

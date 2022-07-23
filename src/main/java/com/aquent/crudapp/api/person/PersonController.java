@@ -40,10 +40,10 @@ public class PersonController {
     public List<Person> unassignedPeople() { return personService.listPeopleWithNoClients();}
 
     @PutMapping(value="updatePersonById")
-    public void updatePersonById(@RequestParam Integer personId, @RequestParam Integer clientId) {  personService.addClientFromPersonId(personId, clientId);}
+    public int updatePersonById(@RequestParam Integer personId, @RequestParam Integer clientId) { return personService.addClientFromPersonId(personId, clientId);}
 
     @PutMapping(value="deleteClientFromPersonId")
-    public void deleteClientFromPersonId(@RequestParam Integer personId) { personService.updatePersonClientFromId(personId);}
+    public int deleteClientFromPersonId(@RequestParam Integer personId) { return personService.updatePersonClientFromId(personId);}
 
     /**
      * Validates and saves a new person.

@@ -38,6 +38,7 @@ const Form = (props) => {
     setAllFreeContacts([...data]);
   };
 
+  //Buggy here..didn't have a lot of choice no time
   const addContactToClient = async () => {
     const settings = {
       method: "PUT",
@@ -46,12 +47,12 @@ const Form = (props) => {
       },
     };
     try {
-      const fetchResponse = await fetch(
+      await fetch(
         `person/updatePersonById?personId=${selectedContact}&clientId=${currClient.clientId}`,
         settings
       );
-      await fetchResponse.json();
-      currContacts.push();
+      //await fetchResponse.json();
+      window.location.reload();
     } catch (e) {
       return e;
     }
@@ -65,12 +66,12 @@ const Form = (props) => {
       },
     };
     try {
-      const fetchResponse = await fetch(
+      await fetch(
         `person/deleteClientFromPersonId?personId=${personId}`,
         settings
       );
-      await fetchResponse.json();
-      currContacts.filter((contact) => contact.contactId === personId);
+      //await fetchResponse.json();
+      window.location.reload();
     } catch (e) {
       return e;
     }

@@ -22,9 +22,9 @@ public interface PersonDao {
 
     List<Person> listPeopleWithNoClients();
 
-    void addClientFromPersonId(Integer personId, Integer clientId);
+    int addClientFromPersonId(Integer personId, Integer clientId);
 
-    void deletePersonClientFromId(Integer personId);
+    int deletePersonClientFromId(Integer personId);
     /**
      * Creates a new person record.
      *
