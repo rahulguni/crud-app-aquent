@@ -51,8 +51,22 @@ const Form = (props) => {
         `person/updatePersonById?personId=${selectedContact}&clientId=${currClient.clientId}`,
         settings
       );
-      await fetchResponse.json();
-      window.location.reload();
+      const data = await fetchResponse.json();
+      let newContact;
+      if (data) {
+        for (const contact of allFreeContacts) {
+          if (contact.personId === selectedContact) {
+            newContact = { ...contact };
+            newContact.clientId = currClient.clientId;
+            break;
+          }
+        }
+        if (newContact) {
+          setSelectedContact(null);
+          getAllFreeContacts();
+          props.setCurrClientContacts([newContact, ...currContacts]);
+        }
+      }
     } catch (e) {
       return e;
     }
@@ -70,8 +84,18 @@ const Form = (props) => {
         `person/deleteClientFromPersonId?personId=${personId}`,
         settings
       );
-      await fetchResponse.json();
-      window.location.reload();
+      const data = await fetchResponse.json();
+      if (data) {
+        const newContacts = [];
+        currContacts.forEach((contact) => {
+          if (contact.personId !== personId) {
+            newContacts.push(contact);
+          }
+        });
+        setSelectedContact(null);
+        getAllFreeContacts();
+        props.setCurrClientContacts([...newContacts]);
+      }
     } catch (e) {
       return e;
     }
@@ -105,7 +129,9 @@ const Form = (props) => {
                 <TableCell align="right">{contact.emailAddress}</TableCell>
                 <TableCell align="right">{contact.phone}</TableCell>
                 <TableCell align="right">
-                  <Button onClick={() => deleteContactFromClient(contact.personId)}>
+                  <Button
+                    onClick={() => deleteContactFromClient(contact.personId)}
+                  >
                     <DeleteForeverIcon />
                   </Button>
                 </TableCell>

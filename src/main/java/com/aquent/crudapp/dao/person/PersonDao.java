@@ -24,7 +24,7 @@ public interface PersonDao {
 
     int addClientFromPersonId(Integer personId, Integer clientId);
 
-    int deletePersonClientFromId(Integer personId);
+    int updatePersonClientFromId(Integer personId);
     /**
      * Creates a new person record.
      *

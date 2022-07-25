@@ -52,8 +52,9 @@ public class DefaultPersonService implements PersonService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
     public int updatePersonClientFromId(Integer personId) {
-        return personDao.deletePersonClientFromId(personId);
+        return personDao.updatePersonClientFromId(personId);
     }
 
     @Override

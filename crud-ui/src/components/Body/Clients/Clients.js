@@ -1,3 +1,4 @@
+/* eslint-disable */
 import ClientsTableLayout from "../Layouts/TableLayout";
 import { useEffect, useState } from "react";
 import DialogBox from "../Layouts/Popup";
@@ -13,16 +14,17 @@ export default function ClientsTable(props) {
   const [formFor, setFormFor] = useState("Create");
   const allHeaders = ["Company Name", "Website", "Phone"];
 
-
-  const getAllClientContacts = async() => {
-    const response = await fetch(`person/listForClient?clientId=${currClient.clientId}`);
+  const getAllClientContacts = async () => {
+    const response = await fetch(
+      `person/listForClient?clientId=${currClient.clientId}`
+    );
     const data = await response.json();
     setCurrClientContacts([...data]);
-  }
+  };
 
   useEffect(() => {
-    if(currClient) {
-        getAllClientContacts()
+    if (currClient) {
+      getAllClientContacts();
     }
   }, [currClient]);
 
@@ -41,7 +43,14 @@ export default function ClientsTable(props) {
       </DialogBox>
 
       <DialogBox openPopup={openPeoplePopup} setOpenPopup={setOpenPeoplePopup}>
-        <ClientContactsForm currContacts={currClientContacts} currClient={currClient} openFormForClientContacts={setOpenPeoplePopup}> </ClientContactsForm>
+        <ClientContactsForm
+          currContacts={currClientContacts}
+          currClient={currClient}
+          openFormForClientContacts={setOpenPeoplePopup}
+          setCurrClientContacts={setCurrClientContacts}
+        >
+          {" "}
+        </ClientContactsForm>
       </DialogBox>
       <ClientsTableLayout
         allHeaders={allHeaders}

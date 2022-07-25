@@ -1,20 +1,32 @@
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import {
+  enablePersonFormButtons,
+  enableClientsFormButtons,
+} from "../Layouts/utils/formValidator";
+import {
   createPerson,
   updatePerson,
   removeContact,
   createClient,
   updateClient,
-  deleteClient
+  deleteClient,
 } from "../../Requests/Services";
 
 const AllButtons = (props) => {
   const formFor = props.formFor;
+  var enableButton;
+  if (props.formMode === "person") {
+    enableButton = enablePersonFormButtons(props.currObject);
+  } else {
+    enableButton = enableClientsFormButtons(props.currObject);
+  }
+
   if (formFor === "Create") {
     return (
       <Grid item>
         <Button
+          disabled={!enableButton}
           sx={{ m: 3 }}
           variant="contained"
           color="success"
@@ -24,9 +36,10 @@ const AllButtons = (props) => {
               ? createPerson(
                   props.currObject,
                   props.cancelBtn,
-                  props.setAllTableObjects
+                  props.setAllTableObjects,
+                  props.openErrorPopup
                 )
-              : createClient(props.currObject)
+              : createClient(props.currObject, props.openErrorPopup)
           }
         >
           Create
@@ -62,6 +75,7 @@ const AllButtons = (props) => {
           Delete
         </Button>
         <Button
+          disabled={!enableButton}
           sx={{ m: 3 }}
           variant="contained"
           color="success"
@@ -71,9 +85,10 @@ const AllButtons = (props) => {
               ? updatePerson(
                   props.currObject,
                   props.cancelBtn,
-                  props.updateTableObjects
+                  props.updateTableObjects,
+                  props.openErrorPopup
                 )
-              : updateClient(props.currObject)
+              : updateClient(props.currObject, props.openErrorPopup)
           }
         >
           Update

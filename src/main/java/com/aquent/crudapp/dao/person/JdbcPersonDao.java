@@ -71,7 +71,7 @@ public class JdbcPersonDao implements PersonDao {
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
-    public int deletePersonClientFromId(Integer personId) {
+    public int updatePersonClientFromId(Integer personId) {
         return namedParameterJdbcTemplate.update(SQL_DELETE_CLIENT_FROM_PERSONID, Collections.singletonMap("personId", personId));
     }
 
