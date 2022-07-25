@@ -38,7 +38,6 @@ const Form = (props) => {
     setAllFreeContacts([...data]);
   };
 
-  //Buggy here..didn't have a lot of choice no time
   const addContactToClient = async () => {
     const settings = {
       method: "PUT",
